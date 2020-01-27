@@ -1,6 +1,8 @@
+var z_max = 20;
+
 
 var container_pre = `
-	<div class='item'>
+	<div class='item' onmousedown='stopPropagating()'>
 		<div class='handle' onmousedown='dragMouseDown()'></div>
 		<div class='item-content'>
 `;
@@ -33,10 +35,15 @@ $( document ).ready(function() {
 			console.log("making textbox");
 			$("#main").append(container_pre + "<textarea></textarea>" + container_post);
 		}
+		else if ($(this).attr('id') == "spotify") {
+			console.log("making spotify");
+			$("#main").append(container_pre + "<iframe src='' frameborder='0' allowtransparency='true' allow='encrypted-media'></iframe>" + container_post);
+			$("#main iframe").last().attr("src", "https://open.spotify.com/embed/playlist/7mCyRDqYopn6QVU9cYgHyk");
+		}
 		else if ($(this).attr('id') == "image") {
 			console.log("making image");
 			$("#main").append(container_pre + "<img src=''></img>" + container_post);
-			$("#main img").last().attr("src", "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+			//$("#main img").last().attr("src", "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
 		}
 		else {
 			console.log("making generic");
@@ -59,14 +66,34 @@ $( document ).ready(function() {
       change: zoom
     });
 
+	var curYPos = 0;
+	var curXPos = 0;
+	var curDown = false;
+
+	$(window).on("mousemove", function (event) {
+	  if (curDown === true) {
+	    $(document).scrollTop(parseInt($(document).scrollTop() + (curYPos - event.pageY)));
+	    $(document).scrollLeft(parseInt($(document).scrollLeft() + (curXPos - event.pageX)));
+	  }
+	});
+
+	$("#main").on("mousedown", function (e) { curDown = true; curYPos = e.pageY; curXPos = e.pageX; e.preventDefault(); });
+	$(window).on("mouseup", function (e) { curDown = false; });
+	$(window).on("mouseout", function (e) { curDown = false; });
+
 });
 
 function zoom() {
 	var centerX = window.scrollX + window.innerWidth / 2;
 	var centerY = window.scrollY + window.innerHeight / 2;
-	//$("#main").css('transform-origin', centerX  + "px " + centerY + "px");
-	//var zoom = $("#zoom").slider("value") / 100;
-	//$("#main").css('transform', 'scale(' + zoom + ')');
+	$("#main").css('transform-origin', centerX  + "px " + centerY + "px");
+	var zoom = $("#zoom").slider("value") / 100;
+	$("#main").css('transform', 'scale(' + zoom + ')');
+}
+
+function stopPropagating() {
+	var e = window.event;
+	e.stopPropagation();
 }
 
 var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -74,7 +101,10 @@ var elem;
 
 function dragMouseDown() {
 	var e = window.event;
+	e.stopPropagation();
 	elem = document.getElementById(e.target.parentElement.id);
+	z_max++;
+	elem.style.zIndex = z_max.toString();
 	pos3 = e.clientX;
 	pos4 = e.clientY;
 	document.onmouseup = closeDragElement;
@@ -83,6 +113,7 @@ function dragMouseDown() {
 
 function elementDrag() {
 	var e = window.event;
+	e.stopPropagation();
 	var scale = $("#zoom").slider("value") / 100;
 	pos1 = (pos3 - e.clientX) / scale;
 	pos2 = (pos4 - e.clientY) / scale;

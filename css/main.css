@@ -14,6 +14,7 @@ div .item {
 	top: 0px;
 	left: 0px;
 	box-shadow: inset 0 0 100px gray;
+	pointer-events:none;
 }
 
 #main {
@@ -31,11 +32,11 @@ div .item {
 	position: fixed;
 	height: 100px;
 	width: 50%;
-	top: 25px;
+	bottom: 25px;
 	right: 25%;
 	left: 25%;
 	border: 1px solid black;
-	z-index: 5;
+	z-index: 2147483647;
 }
 
 .control-item {
@@ -53,12 +54,13 @@ div .item {
 	border: 3px solid black;
 	z-index: 1;
 	transform: translate(-50%, -50%);
+	transform-origin: top left;
 	resize: both;
 }
 
 .handle {
 	width: 100%;
-	height: 10px;
+	height: 15px;
 	background-color: gray;
 	cursor: move;
 }
@@ -66,11 +68,16 @@ div .item {
 .item-content {
 	height: calc(100% - 10px);
 	width: 100%;
-	background-color: green;
+	background-color: black;
 }
 
-#music {
+#spotify {
 	left: 125px;
+}
+
+iframe {
+	height: calc(100% - 15px);
+	width: 100%;
 }
 
 #text {
@@ -98,3 +105,15 @@ img {
 	/*max-width:100%;
 	max-height:100%;*/
 }
+
+#save {
+	position: fixed;
+	top: 15px;
+	right: 15px;
+	height: 50px;
+	width: 50px;
+	background-color: blue;
+	z-index: 2147483647;
+}
+
+
