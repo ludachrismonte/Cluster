@@ -7,6 +7,11 @@ div .item {
   overflow: auto;
 }
 
+input {
+	width: 100%;
+	border: 0px;
+}
+
 #viewport {
 	position: fixed;
 	height: 100%;
@@ -110,10 +115,28 @@ img {
 	position: fixed;
 	top: 15px;
 	right: 15px;
-	height: 50px;
-	width: 50px;
-	background-color: blue;
+	height: 60px;
+	width: 60px;
+	background-image: url("../img/save-icon.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	cursor: pointer;
 	z-index: 2147483647;
+	filter: drop-shadow(0 0 25px black);
 }
 
-
+#trash {
+	position: fixed;
+	top: 90px;
+	right: 5px;
+	height: 75px;
+	width: 75px;
+	background-image: url("../img/trash.png");
+	background-size: contain;
+	cursor: pointer;
+	z-index: 2147483647;
+	filter: drop-shadow(0 0 25px black);
+}
+#trash:hover {
+	background-image: url("../img/trash-open.png");
+}

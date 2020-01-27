@@ -7,6 +7,11 @@ var container_pre = `
 		<div class='item-content'>
 `;
 
+var image_inner = `
+			<img src='' style="display: none"></img>
+			<input class="image-src-input" type="text" name="url" placeholder="URL" onkeypress="if(event.keyCode == 13) setImage(event)">
+`;
+
 var container_post = `
 		</div>
 	</div>
@@ -42,7 +47,9 @@ $( document ).ready(function() {
 		}
 		else if ($(this).attr('id') == "image") {
 			console.log("making image");
-			$("#main").append(container_pre + "<img src=''></img>" + container_post);
+			$("#main").append(container_pre + image_inner + container_post);
+			$("#main img").last().attr("id", id + "-img");
+			$("#main .image-src-input").last().attr("id", id + "-input");
 			//$("#main img").last().attr("src", "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
 		}
 		else {
@@ -83,6 +90,13 @@ $( document ).ready(function() {
 
 });
 
+function setImage(event) {
+	console.log(event.target.previousElementSibling);
+	event.target.previousElementSibling.src = event.srcElement.value;
+	event.target.previousElementSibling.style.display = "block";
+	event.srcElement.style.display = "none";
+}
+
 function zoom() {
 	var centerX = window.scrollX + window.innerWidth / 2;
 	var centerY = window.scrollY + window.innerHeight / 2;
@@ -96,8 +110,15 @@ function stopPropagating() {
 	e.stopPropagation();
 }
 
+function trash() {
+	console.log("trashing");
+	if (elem) {
+		elem.outerHTML = "";
+	}
+}
+
 var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-var elem;
+var elem = null;
 
 function dragMouseDown() {
 	var e = window.event;
@@ -125,6 +146,7 @@ function elementDrag() {
 
 function closeDragElement() {
 	/* stop moving when mouse button is released:*/
+	elem = null;
 	document.onmouseup = null;
 	document.onmousemove = null;
 }
