@@ -1,27 +1,49 @@
-<!doctype html>
-<html lang="en">
-<head>
+<!doctype html><html lang='en'><head>
 	<meta charset="utf-8">
 	<title>Music</title>
-	<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
+	<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/main.css?v=1.0">
 </head>
-<body>
+<body style="cursor: auto;">
 
 	<div id="save" onclick="save()"></div>
 	<div id="trash" onmouseup="trash()"></div>
 
 	<div id="controls-container">
-		<div id="spotify" class="control-item"></div>
-		<div id="text" class="control-item"></div>
-		<div id="video" class="control-item"></div>
-		<div id="iframe" class="control-item"></div>
-		<div id="image" class="control-item"></div>
-		<div id="title" class="control-item"></div>
-		<div id="zoom"></div>
+		<div id="spotify" class="control-item ui-draggable ui-draggable-handle"></div>
+		<div id="text" class="control-item ui-draggable ui-draggable-handle" style="left: 250px; top: 0px;"></div>
+		<div id="video" class="control-item ui-draggable ui-draggable-handle"></div>
+		<div id="iframe" class="control-item ui-draggable ui-draggable-handle"></div>
+		<div id="image" class="control-item ui-draggable ui-draggable-handle" style="left: 375px; top: 0px;"></div>
+		<div id="title" class="control-item ui-draggable ui-draggable-handle" style="left: 0px; top: 0px;"></div>
+		<div id="zoom" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header ui-slider-range-min" style="width: 38.8889%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 38.8889%;"></span></div>
 	</div>
 
-	<div id="main"></div>
+	<div id="main" style="transform-origin: 3794px 4154px; transform: scale(0.9);">
+	<div class="item" onmousedown="stopPropagating()" id="8ebad1d7-eef3-8553-02f9-b14eb623e8f9" style="top: 4467px; left: 4594px; height: 234px; width: 507px;">
+		<div class="handle" onmousedown="dragMouseDown()" id="62ac3992-24b4-113b-b8c6-fbc0e26c175f-handle"></div>
+		<div class="item-content" style="top: 2805.96px; left: 3959.09px;">
+
+		</div>
+	</div>
+
+	<div class="item" onmousedown="stopPropagating()" id="f01f01a2-419a-ba67-ac28-ae32f4765160" style="top: 2771.17px; left: 4267.78px; width: 429px; height: 237px;">
+		<div class="handle" onmousedown="dragMouseDown()" id="62ac3992-24b4-113b-b8c6-fbc0e26c175f-handle"></div>
+		<div class="item-content" style="top: 2805.96px; left: 3959.09px;">
+
+			<img src="https://crushdmichigan.com" style="display: block;" id="f01f01a2-419a-ba67-ac28-ae32f4765160-img">
+			<input class="image-src-input" type="text" name="url" placeholder="URL" onkeypress="if(event.keyCode == 13) setImage(event)" id="f01f01a2-419a-ba67-ac28-ae32f4765160-input" style="display: none;">
+
+		</div>
+	</div>
+
+	<div class="item" onmousedown="stopPropagating()" id="62ac3992-24b4-113b-b8c6-fbc0e26c175f" style="top: 2785px; left: 3630.89px; width: 294px; height: 317px; z-index: 21;">
+		<div class="handle" onmousedown="dragMouseDown()" id="62ac3992-24b4-113b-b8c6-fbc0e26c175f-handle"></div>
+		<div class="item-content" style="top: 2805.96px; left: 3959.09px;">
+<textarea></textarea>
+		</div>
+	</div>
+</div>
 
 	<div id="viewport"></div>
 
@@ -29,5 +51,5 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="js/dragndrop.js"></script>
 	<script src="js/save.js"></script>
-</body>
-</html>
+
+</body></html>
